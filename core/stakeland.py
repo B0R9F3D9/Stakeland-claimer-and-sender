@@ -19,8 +19,10 @@ class Stakeland:
                 url=f'https://memestaking-api.stakeland.com/wallet/info/{self.acc.address}',
                 proxy=self.acc.proxy
             ) as resp:
-                data = (await resp.json())['rewards'][0]
-        smeme_balance = int(data['amount'])
+                data = await resp.json()
+        if not data['rewards']:
+            raise Exception(f'{self.acc.info} Анстейк невозможен! Нет застейканных $MEME!')
+        smeme_balance = int(data['rewards'][0]['amount'])
         amount = int(int(data['amount']) * random.uniform(*UNSTAKE_PERCENT) / 100)
         proofs = [line[2:] for line in data['proof']]
 
@@ -47,6 +49,8 @@ class Stakeland:
         
         contract = self.acc.w3.eth.contract(address=MEME_CONTRACT, abi=ERC20_ABI)
         meme_balance = await contract.functions.balanceOf(self.acc.address).call()
+        if meme_balance == 0:
+            raise Exception(f'{self.acc.info} Отправка невозможна! Нет $MEME')
         amount = int(meme_balance * random.uniform(*TRANSFER_PERCENT) / 100)
 
         logger.info(f'{self.acc.info} Перевожу {amount/10**18:.1f} MEME на {self.acc.withdr_addr}')
