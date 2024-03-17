@@ -25,7 +25,10 @@ class Checker:
 
         async with self.session.get(f'https://memestaking-api.stakeland.com/wallet/info/{acc.address}', proxy=acc.proxy) as resp:
             data = await resp.json()
-        smeme_balance = int(data['rewards'][0]['amount']) / 10**18
+        if not data['rewards']:
+            smeme_balance = 0
+        else:
+            smeme_balance = int(data['rewards'][0]['amount']) / 10**18
         smeme_balance_usd = smeme_balance * self.meme_price
 
         return {
