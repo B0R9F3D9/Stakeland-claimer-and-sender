@@ -10,7 +10,7 @@ SHUFFLE_WALLETS: bool = False
 # Мин, макс время ожидания между аккаунтами
 SLEEP_BETWEEN_ACCS: tuple[int, int] = (10, 15)
 
-# Мин, макс процент баланса $sMEME для анстейка
+# Мин, макс процент стейка $MEME для анстейка
 UNSTAKE_PERCENT: tuple[int, int] = (100, 100)
 
 # Мин, макс процент баланса $MEME для перевода
