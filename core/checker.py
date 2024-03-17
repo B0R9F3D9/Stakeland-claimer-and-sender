@@ -35,7 +35,7 @@ class Checker:
             '№': acc.id,
             'Адрес': acc.addr,
             'Прокси': acc.prox,
-            'Адреса для вывода': acc.withdr_addr,
+            'Адрес для вывода': acc.withdr_addr,
             'Баланс $ETH': f'{eth_balance:.5f} ETH (${eth_balance_usd:.2f})',
             'Баланс $MEME': f'{meme_balance:.1f} MEME (${meme_balance_usd:.2f})',
             'Застейкано $MEME': f'{smeme_balance:.1f} MEME (${smeme_balance_usd:.2f})'
